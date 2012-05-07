@@ -15,6 +15,10 @@ $config = array(
 		'stats' => false
 	),
 	
+	'php' => array(
+		'timezone' => 'America/Montreal'
+	),
+	
 	'db' => array(
 		'adapter' => 'pdo_mysql',
 		'config' => array(

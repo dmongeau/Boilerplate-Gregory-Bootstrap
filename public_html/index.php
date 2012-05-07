@@ -1,9 +1,10 @@
 <?php
 
-
-date_default_timezone_set('America/Montreal');
-ini_set('magic_quotes_gpc',0);
-
+/**
+ *
+ * Constants
+ *
+ */
 define('PATH_APP',dirname(__FILE__).'/../app');
 define('PATH_ROOT',dirname(__FILE__));
 define('PATH_PAGES',dirname(__FILE__).'/pages');
@@ -12,16 +13,32 @@ define('PATH_PLUGINS',PATH_APP.'/Gregory/plugins');
 define('PATH_LIB',PATH_APP.'/lib');
 define('PATH_MODELS',PATH_APP.'/models');
 
-
+/**
+ *
+ * Incudes
+ *
+ */
 require PATH_APP.'/Bob/Bob.php';
 require PATH_APP.'/Gregory/Gregory.php';
 require PATH_APP.'/Kate/Kate.php';
 
 require PATH_APP.'/lib/functions.php';
 
-
+/**
+ *
+ * Gregory
+ *
+ */
 $config  = include PATH_APP.'/config.php';
 $app = new Gregory($config);
+
+/**
+ *
+ * PHP Config
+ *
+ */
+date_default_timezone_set($app->getConfig('php.timezone'));
+ini_set('magic_quotes_gpc',0);
 
 /**
  *
