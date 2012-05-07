@@ -20,14 +20,13 @@ RewriteEngine On
 
 RewriteBase /
 
-RewriteCond %{HTTP_HOST} ^(www\.)?laplusgrande\.ca$ [NC]
-RewriteRule ^(.*)$ http://www.laplusgrande.com/$1 [R=301,L]
+##############Forcer les www##################
+RewriteCond %{HTTP_HOST} ^ledomaine\.com$ [NC]
+RewriteRule ^(.*)$ http://www\.ledomaine\.com/$1 [L,R=301]
 
-RewriteCond %{HTTP_HOST} ^laplusgrande\.com$ [NC]
-RewriteRule ^(.*)$ http://www\.laplusgrande\.com/$1 [L,R=301]
-
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule "." - [skip=100]
+##############Forcer sans www##################
+#RewriteCond %{HTTP_HOST} ^www\.ledomaine\.com$ [NC]
+#RewriteRule ^(.*)$ http://ledomaine\.com/$1 [L,R=301]
 
 
 ##############Si le fichier ou dossier existe on skip##################
@@ -35,7 +34,7 @@ RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule "." - [skip=100]
 
 
-##############Redirection des images en cache
+##############Redirection des images en cache##################
 RewriteCond %{REQUEST_URI} ^/resizer/
 RewriteCond %{REQUEST_URI} !^.*//.*$
 RewriteCond %{REQUEST_METHOD} !POST
