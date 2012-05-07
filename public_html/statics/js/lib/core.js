@@ -1,3 +1,8 @@
+/*
+ *
+ * jQuery JSON
+ *
+ */
 (function($){$.toJSON=function(o)
 {if(typeof(JSON)=='object'&&JSON.stringify)
 return JSON.stringify(o);var type=typeof(o);if(o===null)
@@ -29,6 +34,11 @@ throw new SyntaxError("Error parsing JSON, source is not valid.");};$.quoteStrin
 {var c=_meta[a];if(typeof c==='string')return c;c=a.charCodeAt();return'\\u00'+Math.floor(c/16).toString(16)+(c%16).toString(16);})+'"';}
 return'"'+string+'"';};var _escapeable=/["\\\x00-\x1f\x7f-\x9f]/g;var _meta={'\b':'\\b','\t':'\\t','\n':'\\n','\f':'\\f','\r':'\\r','"':'\\"','\\':'\\\\'};})(jQuery);
 
+/*
+ *
+ * jQuery pngFix
+ *
+ */
 (function($){jQuery.fn.pngFix=function(settings){settings=jQuery.extend({blankgif:"blank.gif"},settings);var ie55=navigator.appName=="Microsoft Internet Explorer"&&parseInt(navigator.appVersion)==4&&navigator.appVersion.indexOf("MSIE 5.5")!=-1;var ie6=navigator.appName=="Microsoft Internet Explorer"&&parseInt(navigator.appVersion)==4&&navigator.appVersion.indexOf("MSIE 6.0")!=-1;if(jQuery.browser.msie&&(ie55||ie6)){jQuery(this).find("img[src$=.png]").each(function(){jQuery(this).attr("width",jQuery(this).width());
 jQuery(this).attr("height",jQuery(this).height());var prevStyle="";var strNewHTML="";var imgId=jQuery(this).attr("id")?'id="'+jQuery(this).attr("id")+'" ':"";var imgClass=jQuery(this).attr("class")?'class="'+jQuery(this).attr("class")+'" ':"";var imgTitle=jQuery(this).attr("title")?'title="'+jQuery(this).attr("title")+'" ':"";var imgAlt=jQuery(this).attr("alt")?'alt="'+jQuery(this).attr("alt")+'" ':"";var imgAlign=jQuery(this).attr("align")?"float:"+jQuery(this).attr("align")+";":"";var imgHand=jQuery(this).parent().attr("href")?
 "cursor:hand;":"";if(this.style.border){prevStyle+="border:"+this.style.border+";";this.style.border=""}if(this.style.padding){prevStyle+="padding:"+this.style.padding+";";this.style.padding=""}if(this.style.margin){prevStyle+="margin:"+this.style.margin+";";this.style.margin=""}var imgStyle=this.style.cssText;strNewHTML+="<span "+imgId+imgClass+imgTitle+imgAlt;strNewHTML+='style="position:relative;white-space:pre-line;display:inline-block;background:transparent;'+imgAlign+imgHand;strNewHTML+="width:"+
@@ -36,159 +46,11 @@ jQuery(this).width()+"px;"+"height:"+jQuery(this).height()+"px;";strNewHTML+="fi
 jQuery(this).css("background-image");if(bgIMG.indexOf(".png")!=-1){var iebg=bgIMG.split('url("')[1].split('")')[0];jQuery(this).css("background-image","none");jQuery(this).get(0).runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+iebg+"',sizingMethod='scale')"}});jQuery(this).find("input[src$=.png]").each(function(){var bgIMG=jQuery(this).attr("src");jQuery(this).get(0).runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader"+"(src='"+bgIMG+"', sizingMethod='scale');";
 jQuery(this).attr("src",settings.blankgif)})}return jQuery}})(jQuery);
 
-
-// minmax.js: make IE5+/Win support CSS min/max-width/height
-// version 1.0, 08-Aug-2003
-// written by Andrew Clover <and@doxdesk.com>, use freely
-
-/*@cc_on
-@if (@_win32 && @_jscript_version>4)
-
-var minmax_elements;
-
-minmax_props= new Array(
-  new Array('min-width', 'minWidth'),
-  new Array('max-width', 'maxWidth'),
-  new Array('min-height','minHeight'),
-  new Array('max-height','maxHeight')
-);
-
-// Binding. Called on all new elements. If <body>, initialise; check all
-// elements for minmax properties
-
-function minmax_bind(el) {
-  var i, em, ms;
-  var st= el.style, cs= el.currentStyle;
-
-  if (minmax_elements==window.undefined) {
-    // initialise when body element has turned up, but only on IE
-    if (!document.body || !document.body.currentStyle) return;
-    minmax_elements= new Array();
-    window.attachEvent('onresize', minmax_delayout);
-    // make font size listener
-    em= document.createElement('div');
-    em.setAttribute('id', 'minmax_em');
-    em.style.position= 'absolute'; em.style.visibility= 'hidden';
-    em.style.fontSize= 'xx-large'; em.style.height= '5em';
-    em.style.top='-5em'; em.style.left= '0';
-    if (em.style.setExpression) {
-      em.style.setExpression('width', 'minmax_checkFont()');
-      document.body.insertBefore(em, document.body.firstChild);
-    }
-  }
-
-  // transform hyphenated properties the browser has not caught to camelCase
-  for (i= minmax_props.length; i-->0;)
-    if (cs[minmax_props[i][0]])
-      st[minmax_props[i][1]]= cs[minmax_props[i][0]];
-  // add element with properties to list, store optimal size values
-  for (i= minmax_props.length; i-->0;) {
-    ms= cs[minmax_props[i][1]];
-    if (ms && ms!='auto' && ms!='none' && ms!='0' && ms!='') {
-      st.minmaxWidth= cs.width; st.minmaxHeight= cs.height;
-      minmax_elements[minmax_elements.length]= el;
-      // will need a layout later
-      minmax_delayout();
-      break;
-  } }
-}
-
-// check for font size changes
-
-var minmax_fontsize= 0;
-function minmax_checkFont() {
-  var fs= document.getElementById('minmax_em').offsetHeight;
-  if (minmax_fontsize!=fs && minmax_fontsize!=0)
-    minmax_delayout();
-  minmax_fontsize= fs;
-  return '5em';
-}
-
-// Layout. Called after window and font size-change. Go through elements we
-// picked out earlier and set their size to the minimum, maximum and optimum,
-// choosing whichever is appropriate
-
-// Request re-layout at next available moment
-var minmax_delaying= false;
-function minmax_delayout() {
-  if (minmax_delaying) return;
-  minmax_delaying= true;
-  window.setTimeout(minmax_layout, 0);
-}
-
-function minmax_stopdelaying() {
-  minmax_delaying= false;
-}
-
-function minmax_layout() {
-  window.setTimeout(minmax_stopdelaying, 100);
-  var i, el, st, cs, optimal, inrange;
-  for (i= minmax_elements.length; i-->0;) {
-    el= minmax_elements[i]; st= el.style; cs= el.currentStyle;
-
-    // horizontal size bounding
-    st.width= st.minmaxWidth; optimal= el.offsetWidth;
-    inrange= true;
-    if (inrange && cs.minWidth && cs.minWidth!='0' && cs.minWidth!='auto' && cs.minWidth!='') {
-      st.width= cs.minWidth;
-      inrange= (el.offsetWidth<optimal);
-    }
-    if (inrange && cs.maxWidth && cs.maxWidth!='none' && cs.maxWidth!='auto' && cs.maxWidth!='') {
-      st.width= cs.maxWidth;
-      inrange= (el.offsetWidth>optimal);
-    }
-    if (inrange) st.width= st.minmaxWidth;
-
-    // vertical size bounding
-    st.height= st.minmaxHeight; optimal= el.offsetHeight;
-    inrange= true;
-    if (inrange && cs.minHeight && cs.minHeight!='0' && cs.minHeight!='auto' && cs.minHeight!='') {
-      st.height= cs.minHeight;
-      inrange= (el.offsetHeight<optimal);
-    }
-    if (inrange && cs.maxHeight && cs.maxHeight!='none' && cs.maxHeight!='auto' && cs.maxHeight!='') {
-      st.height= cs.maxHeight;
-      inrange= (el.offsetHeight>optimal);
-    }
-    if (inrange) st.height= st.minmaxHeight;
-  }
-}
-
-// Scanning. Check document every so often until it has finished loading. Do
-// nothing until <body> arrives, then call main init. Pass any new elements
-// found on each scan to be bound   
-
-var minmax_SCANDELAY= 500;
-
-function minmax_scan() {
-  var el;
-  for (var i= 0; i<document.all.length; i++) {
-    el= document.all[i];
-    if (!el.minmax_bound) {
-      el.minmax_bound= true;
-      minmax_bind(el);
-  } }
-}
-
-var minmax_scanner;
-function minmax_stop() {
-  window.clearInterval(minmax_scanner);
-  minmax_scan();
-}
-
-minmax_scan();
-minmax_scanner= window.setInterval(minmax_scan, minmax_SCANDELAY);
-window.attachEvent('onload', minmax_stop);
-
-@end @*/
-
-
-/*****************************************************************************************
-
-		Sparko.ca - jQuery Plugins and Functions - 1.0
-		Author : David Mongeau-Petitpas
-
-******************************************************************************************/
+/*
+ *
+ * jQuery plugins
+ *
+ */
 jQuery.fn.extend({
 	
 	//////////////////////////////////////////////////
@@ -280,96 +142,37 @@ jQuery.fn.extend({
 		});
 		
 		return $(this);
-	},
-	
-	//////////////////////////////////////////////////
-	//////Text Hints in input
-	//////////////////////////////////////////////////
-	isValid: function(type) {
-		var val = $(this).val();
-		
-		if(type == "email") {
-			if(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(val) == false) { return false; }
-		}
-		else if(type == "postalcode") {
-			if (val.length == 6 && val.search(/^[a-zA-Z]\d[a-zA-Z]\d[a-zA-Z]\d$/) != -1) return true;
-			else if (val.length == 7 && val.search(/^[a-zA-Z]\d[a-zA-Z](-|\s)\d[a-zA-Z]\d$/) != -1) return true;
-			else return false;
-		}
-		
-		return true;
-	},
-	
-	//////////////////////////////////////////////////
-	//////Form Validation
-	//////////////////////////////////////////////////
-	"validate" : function(opts) {
-	
-		var form = $(this);
-		var isValid = true;
-		
-		var options = $.extend({}, {
-			'validIcon' : '/statics/img/btn/bon.gif',
-			'invalidIcon' : '/statics/img/btn/mal.gif',
-			'validClass' : 'valid',
-			'invalidClass' : 'invalid'
-		}, opts);
-		
-		function showError(el) {
-			el.addClass("redbg").after("<img src='"+options.invalidIcon+"' class='validIcons' />");
-		}
-
-		form.find("img.validIcons").remove();
-		form.find("input, select, textarea").removeClass("redbg");
-		
-		form.find("input.required, select.required, textarea.required").each(function() {
-		
-			if($(this).hasClass("email") && !$(this).isValid("email")) {
-				showError($(this));
-				isValid = false;
-			} else if($(this).attr("type") == "checkbox" && !$(this).is(':checked')) {
-				showError($(this));
-				isValid = false;
-			} else if (!$.trim($(this).val()).length) {
-				showError($(this));
-				isValid = false;
-			}
-			
-		});
-		
-		return isValid;
-	
 	}
 	
 });
 
-function encode_base36(number) {
-	number = parseInt(number);
-	var a = 'a'; a = a.charCodeAt(0);
-	var first =  number % 36;
-	var str = (first < 10)? first+"":(String.fromCharCode(first-10+a))+"";
-	do {
-		number = number/36;
-		var second = Math.floor(number) % 36;
-		str += (second < 10)? second+"":(String.fromCharCode(second-10+a))+"";
-	} while(number > 36);
-
-	return str;
-
+/*
+ *
+ * Array Object extends
+ *
+ */
+if(typeof(Array.prototype.indexOf) == undefined) {
+	Array.prototype.indexOf = function(it) {
+		for(var i = 0; i < this.length; i++) {
+			if(this[i] == it) {
+				return i;
+			}
+		}
+		return -1;
+	};
 }
-
-function decode_base36 (str) {
-	var a = 'a'; a = a.charCodeAt(0);
-	var val = 0;
-	for(var i = 0; i < str.length; i++){
-		val += ((str.charCodeAt(i) < a)? parseInt(str.substr(i,1)):(str.charCodeAt(i) - a+10)) * Math.pow(36,i);
-	}
-	return val;
-
-
+if(typeof(Array.prototype.inArray) == undefined) {
+	Array.prototype.inArray = function(it) {
+		return this.indexOf(it) == -1 ? false:true;
+	};
 }
 
 
+/*
+ *
+ * String Object extends
+ *
+ */
 String.prototype.noaccent = function() {
   return this.replace(/[àâä]/gi,"a").replace(/[éèêë]/gi,"e").replace(/[îï]/gi,"i").replace(/[ôö]/gi,"o").replace(/[ùûü]/gi,"u");
 };

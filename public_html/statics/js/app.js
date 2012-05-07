@@ -4,12 +4,8 @@ $.ajaxSetup({cache: false});
 
 
 $(function() {
-		
-		
-		
+	
 	$('input.hint, textarea.hint').hint();
-	
-	
 	
 	$('input.date').datepicker({
 		dateFormat : 'yy-mm-dd',
