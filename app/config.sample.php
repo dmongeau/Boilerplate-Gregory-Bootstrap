@@ -69,7 +69,10 @@ $config = array(
 					'name' => 'Core'
 				),
 				'backend' => array(
-					'name' => 'File'
+					'name' => 'File',
+					'options' => array(
+						'cache_file_umask' => 0644
+					)
 				)
 			),
 			
@@ -82,7 +85,10 @@ $config = array(
 					)
 				),
 				'backend' => array(
-					'name' => 'File'
+					'name' => 'File',
+					'options' => array(
+						'cache_file_umask' => 0644
+					)
 				)
 			),
 			
@@ -95,7 +101,10 @@ $config = array(
 					)
 				),
 				'backend' => array(
-					'name' => 'File'
+					'name' => 'File',
+					'options' => array(
+						'cache_file_umask' => 0644
+					)
 				)
 			)
 		
