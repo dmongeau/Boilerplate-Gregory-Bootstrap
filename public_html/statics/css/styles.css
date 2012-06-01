@@ -38,27 +38,6 @@ body {
 	color:#333;
 }
 
-#header .menu ul {
-	display:block;
-	margin:0;
-	padding:0;
-}
-
-#header .menu ul li {
-	display:block;
-	margin-right:20px;
-	float:left;
-}
-
-#header .menu ul li a {
-	display:block;
-	cursor:pointer;
-}
-
-#header .menu ul li.last {
-	margin:0;
-}
-
 #content {
 	margin:0;
 	position:relative;
@@ -82,15 +61,3 @@ body {
 	font-size:12px;
 	text-decoration:none;
 }
-
-#footer .inner ul {
-	position:relative;
-	float:left;
-}
-
-#footer .inner li {
-	float:left;
-	margin-right:20px;
-	display:block;
-}
-

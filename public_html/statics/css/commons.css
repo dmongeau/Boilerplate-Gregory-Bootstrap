@@ -82,6 +82,34 @@ ul.circle, ul.circle li {
 
 
 
+
+/*
+ *
+ * Menu
+ * 
+ */
+ul.menu {
+	display:block;
+	margin:0;
+	padding:0;
+}
+
+ul.menu li {
+	display:block;
+	margin-right:20px;
+	float:left;
+}
+
+ul.menu li a {
+	display:block;
+	cursor:pointer;
+}
+
+ul.menu li.last {
+	margin:0;
+}
+
+
 /*
  *
  * Forms
@@ -160,29 +188,57 @@ form .field .note {
 	font-size:10px;
 }
 
+/*
+ *
+ * Buttons
+ * 
+ */
 a.button, button {
 	text-decoration:none;
-	padding:3px;
-	font-size:8pt;
+	padding:7px;
+	font-size:12px;
+	border:solid 1px #333;
+	background:#ddd;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	cursor:pointer;
+	background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+	background: -moz-linear-gradient(top,  #eee,  #ccc);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ccc');
+	color:#333;
+}
+a.button:active, button:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#eee));
+	background: -moz-linear-gradient(top,  #ccc,  #eee);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ccc', endColorstr='#eeeeee');
+}
+
+a.button-small, button.small, button.button-small {
+	text-decoration:none;
+	padding:4px;
+	font-size:11px;
 	border:solid 1px #333;
 	background:#ddd;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	cursor:pointer;
-	color:#333;
-	white-space:nowrap;
-	background:#ddd;
-}
-a.button:active, button:active {
-	background:#ccc;
 }
 
 a.submit, button.submit {
 	font-weight:bold !important;	
 }
 
-a.button-small, button.small {
-	padding:2px;
-	font-size:10px;	
+button.ui-datepicker-trigger, button.ui-datepicker-trigger:active {
+	text-decoration:none;
+	padding:0;
+	font-size:12px;
+	border:none;
+	background:transparent;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	cursor:pointer;
+	filter: none;
+	color:#333;
 }

@@ -35,7 +35,7 @@
         <div class="clear"></div>
 		<div id="footer">
 			<div class="inner">
-				<ul>
+				<ul class="menu">
 					<li><a href="/a-propos/">À propos</a></li>
 					<li><a href="/a-propos/contact.html">Contact</a></li>
 					<li><a href="/a-propos/conditions.html">Conditions d'utilisation</a></li>
