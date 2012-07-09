@@ -8,7 +8,7 @@ class Photo extends Kate {
 		'type' => 'db',
 		'table' => array(
 			'name' => array('p' => 'photos'),
-			'primary' => 'pid',
+			'primary' => 'phid',
 			'fields' => '*',
 			'nowFields' => 'dateadded'
 		)

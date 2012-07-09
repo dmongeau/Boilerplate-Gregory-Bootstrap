@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   `pwd` varchar(255) NOT NULL,
   `role` varchar(100) NOT NULL,
+  `phid` int(11) NOT NULL,
   `published` tinyint(1) NOT NULL,
   `deleted` tinyint(1) NOT NULL,
   `dateadded` datetime NOT NULL,

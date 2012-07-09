@@ -11,7 +11,7 @@ class User extends Kate {
 			'nowFields' => array('dateadded'),
 			'deletedField' => 'deleted',
 			'leftJoins' => array(
-				array(array('p'=>'photos'),'p.pid = u.pid',array('photo'=>'filename')),
+				array(array('p'=>'photos'),'p.phid = u.phid',array('photo'=>'filename')),
 			)
 		)
 	);	
