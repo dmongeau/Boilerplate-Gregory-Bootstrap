@@ -1,18 +1,35 @@
 require.config({
 	baseUrl: '/statics/js'
-})
+});
 
 require(
 
-	['jquery','app/page','/statics/boostrap/js/bootstrap.js'],
+	['require','jquery','app/page','/statics/bootstrap/js/bootstrap.js'],
 	
-	function($,Page) {
+	function(require,$,Page) {
 		
 		$.ajaxSetup({cache:false});
 		
 		//Init page
 		$(function(){
 			Page.init($('#inner'));
+			
+			//Load modules
+			if(!REQUIRE_SCRIPTS || !REQUIRE_SCRIPTS.length) return;
+			
+			var modules = [];
+			for(var i = 0; i < REQUIRE_SCRIPTS.length; i++) {
+				var module = REQUIRE_SCRIPTS[i].replace('/statics/js/','').replace(/\.js$/i,'');
+				modules.push(module);
+			}
+			
+			var $container = this.container;
+			require(modules,function() {
+				for(var i = 0; i < arguments.length; i++) {
+					arguments[i]($container);
+				}
+			});
+			
 		});
 		
 		

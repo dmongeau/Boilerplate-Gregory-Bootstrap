@@ -1,14 +1,11 @@
 // JavaScript Document
 
-define(['jquery'], function($,Page,User) {
-	
-	$(function() {
+define(['jquery'], function($) {
+	return function($container) {
 		
 		
 		
 		
 		
-	});
-	
-	
+	}
 });

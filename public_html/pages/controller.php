@@ -26,6 +26,12 @@ if(!empty($SUBACTION) && empty($FORMAT) && ($posExt = strpos($SUBACTION,'.'))) {
 	$this->setParams('action', $ACTION);
 }
 
+$parts = array($MODULE);
+if(!empty($ACTION)) $parts[] = $ACTION;
+if(!empty($SUBACTION)) $parts[] = $SUBACTION;
+if(sizeof($parts) == 1) $parts[] = $MODULE;
+$this->setData('require_module','pages/'.implode('/',$parts));
+
 /*
  *
  * Path constants

@@ -9,6 +9,7 @@
     %{STYLESHEETS}
     <script type="text/javascript">
     	var FB_APPID = '%{FBAPPID}';
+    	var REQUIRE_SCRIPTS = <?=json_encode(Gregory::get()->getScripts())?>;
     <?php if(Gregory::get()->auth->isLogged()) { ?>
 		var User = <?=json_encode(Gregory::get()->auth->getIdentity())?>
     <?php } else { ?>
@@ -48,7 +49,6 @@
     
     <!-- Require.js -->
     <script data-main="/statics/js/main" src="/statics/js/lib/require.js"></script>
-    %{SCRIPTS}
 
 </body>
 </html>
