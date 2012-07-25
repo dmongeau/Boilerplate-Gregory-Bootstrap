@@ -90,15 +90,9 @@ $app->setData('fbappid',$app->getConfig('facebook.appId'));
  */
 
 //Stylesheets
-$app->addStylesheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
 $app->addStylesheet('/statics/css/commons.css');
 $app->addStylesheet('/statics/css/styles.css');
 
-//Scripts
-$app->addScript('https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
-$app->addScript('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js');
-$app->addScript('/statics/js/lib/core.js');
-$app->addScript('/statics/js/app.js');
 
 
 /**

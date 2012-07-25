@@ -7,7 +7,6 @@
     %{THUMBNAIL}
     %{HEAD}
     %{STYLESHEETS}
-    %{SCRIPTS}
     <script type="text/javascript">
     	var FB_APPID = '%{FBAPPID}';
     <?php if(Gregory::get()->auth->isLogged()) { ?>
@@ -18,6 +17,7 @@
 	</script>
 </head>
 <body class="%{BODYCLASS}">
+
     <div id="page">
         <div id="header">
         	<div class="inner">
@@ -45,6 +45,10 @@
 			</div>
 		</div>
     </div>
+    
+    <!-- Require.js -->
+    <script data-main="/statics/js/main" src="/statics/js/lib/require.js"></script>
+    %{SCRIPTS}
 
 </body>
 </html>
